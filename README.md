@@ -21,9 +21,9 @@ Un juego mágico y lindo para niñas de 6 años 💖🌈
 ---
 
 ### 🚀 **Jugar ahora:**
-👉 [https://cesarmassri.github.io/frascos-magicos](https://cesarmassri.github.io/frascos-magicos)
+👉 [https://renatamassri.github.io/frascos-magicos](https://renatamassri.github.io/frascos-magicos)
 
 ---
 
-Hecho con amor para una nena de 6 añitos 💕  
+Hecho con amor por una nena de 6 añitos 💕  
 ¡Que te diviertas mucho!
