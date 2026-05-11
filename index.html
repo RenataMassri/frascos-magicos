@@ -17,12 +17,10 @@
             overflow-y: auto;
         }
 
-        /* 🔥 Fuerza emojis coloridos en Windows */
         .emoji {
             font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", 
-                        "EmojiOne Color", "Android Emoji", sans-serif !important;
+                        "EmojiOne Color", sans-serif !important;
             font-variant-emoji: emoji;
-            -webkit-font-smoothing: antialiased;
         }
 
         h1 { font-size: 2.2em; margin: 10px 0 8px; color: #ff6bcb; }
@@ -51,7 +49,7 @@
         .frasco:active { transform: scale(1.3) rotate(15deg); }
         .frasco.usado { opacity: 0.3; transform: scale(0.7); pointer-events: none; }
 
-        /* Colores mágicos de los frascos */
+        /* === COLORES MÁGICOS DE LOS FRASCOS === */
         .frasco1 { background: linear-gradient(#ff0088, #ff88cc); }
         .frasco2 { background: linear-gradient(#00ffcc, #88ffee); }
         .frasco3 { background: linear-gradient(#ffdd00, #ffee88); }
@@ -194,8 +192,7 @@
 
         function guardarRegalo() {
             inventario.push(document.getElementById("regaloGrande").textContent);
-            document.getElementById("inventarioItems").innerHTML = 
-                inventario.map(e => `<span class="emoji item-inventario">${e}</span>`).join('');
+            document.getElementById("inventarioItems").innerHTML = inventario.map(e => `<span class="emoji item-inventario">${e}</span>`).join('');
             reiniciar();
         }
         function descartarRegalo() { reiniciar(); }
