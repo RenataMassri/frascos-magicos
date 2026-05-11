@@ -2,158 +2,129 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>✨ Frascos Mágicos ✨</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
-            padding: 10px;
+            padding: 8px;
             background: linear-gradient(135deg, #ff9a9e, #fad0c4, #a1c4fd, #c2e9fb);
             font-family: 'Comic Sans MS', cursive, sans-serif;
             text-align: center;
             color: #333;
-            overflow-x: hidden;
+            min-height: 100vh;
+            overflow-y: auto; /* importante para poder bajar */
         }
         h1 {
-            font-size: 2.5em;
-            margin: 15px 0;
-            text-shadow: 3px 3px 0 #fff;
+            font-size: 2.2em;
+            margin: 10px 0 8px;
             color: #ff6bcb;
         }
         p {
-            font-size: 1.4em;
-            margin: 10px 0;
+            font-size: 1.3em;
+            margin: 5px 0 15px;
         }
 
         .frascos-pequenos {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
-            max-width: 100%;
-            margin: 15px auto;
+            margin: 10px 0;
         }
         .frasco {
-            width: 78px;
-            height: 105px;
-            border-radius: 18px 18px 8px 8px;
-            border: 7px solid #333;
+            width: 65px;
+            height: 88px;
+            border-radius: 16px 16px 7px 7px;
+            border: 6px solid #333;
             cursor: pointer;
-            box-shadow: 0 8px 12px rgba(0,0,0,0.3);
-            transition: all 0.2s;
+            box-shadow: 0 6px 10px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em;
+            font-size: 1.8em;
+            transition: all 0.2s;
         }
-        .frasco:active { transform: scale(1.35) rotate(15deg); }
-        .frasco.usado { opacity: 0.3; transform: scale(0.75); pointer-events: none; }
-
-        /* 10 colores */
-        .frasco1 { background: linear-gradient(#ff0088, #ff88cc); }
-        .frasco2 { background: linear-gradient(#00ffcc, #88ffee); }
-        .frasco3 { background: linear-gradient(#ffdd00, #ffee88); }
-        .frasco4 { background: linear-gradient(#4488ff, #88aaff); }
-        .frasco5 { background: linear-gradient(#ff6600, #ffaa77); }
-        .frasco6 { background: linear-gradient(#9900ff, #cc88ff); }
-        .frasco7 { background: linear-gradient(#00ff44, #88ff99); }
-        .frasco8 { background: linear-gradient(#ff3366, #ff99aa); }
-        .frasco9 { background: linear-gradient(#ff8800, #ffbb66); }
-        .frasco10 { background: linear-gradient(#00aaff, #77ddff); }
+        .frasco:active { transform: scale(1.3) rotate(15deg); }
+        .frasco.usado { opacity: 0.3; transform: scale(0.7); pointer-events: none; }
 
         .frasco-vacio {
-            width: 170px;
-            height: 215px;
-            max-width: 90vw;
-            border-radius: 40px 40px 22px 22px;
-            border: 16px solid #333;
-            background: rgba(255,255,255,0.25);
-            margin: 20px auto;
+            width: 155px;
+            height: 195px;
+            border-radius: 35px 35px 20px 20px;
+            border: 14px solid #333;
+            background: rgba(255,255,255,0.3);
+            margin: 15px auto;
             position: relative;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        .frasco-vacio .liquido {
+        .liquido {
             position: absolute;
             bottom: 0;
-            left: 0;
             width: 100%;
             height: 0%;
-            transition: height 0.4s ease;
-            border-radius: 0 0 18px 18px;
+            transition: height 0.4s;
+            border-radius: 0 0 15px 15px;
         }
-        .frasco-vacio .regaloDentro {
+        .regaloDentro {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4.5em;
+            font-size: 4em;
             opacity: 0;
             transition: all 0.6s;
             z-index: 10;
         }
 
-        .humo {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            opacity: 0;
-        }
+        .humo { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
 
+        #zonaRegalo {
+            margin: 15px auto;
+            padding: 10px;
+        }
         button {
-            font-size: 1.5em;
-            padding: 12px 30px;
-            margin: 10px;
-            border: none;
+            font-size: 1.4em;
+            padding: 12px 28px;
+            margin: 8px;
             border-radius: 50px;
+            border: none;
             background: #ff6bcb;
             color: white;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #c93a8a;
+            box-shadow: 0 5px 0 #c93a8a;
         }
-        button:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #c93a8a;
-        }
+        button:active { transform: translateY(3px); box-shadow: 0 2px 0 #c93a8a; }
 
         .inventario {
-            margin: 25px auto;
-            max-width: 100%;
+            margin: 20px auto;
+            padding: 12px;
             background: rgba(255,255,255,0.8);
-            border-radius: 25px;
-            padding: 15px;
+            border-radius: 20px;
+            max-width: 100%;
         }
         .item-inventario {
+            font-size: 2.5em;
+            margin: 5px;
             display: inline-block;
-            font-size: 2.8em;
-            margin: 6px;
-            padding: 8px;
+            padding: 5px 10px;
             background: white;
-            border-radius: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .estrella {
-            position: absolute;
-            font-size: 2em;
-            animation: flotar 2.5s infinite linear;
-            pointer-events: none;
+            border-radius: 15px;
         }
 
         @media (max-width: 480px) {
-            .frasco { width: 68px; height: 92px; font-size: 1.7em; }
-            .frasco-vacio { width: 150px; height: 190px; }
-            .frasco-vacio .regaloDentro { font-size: 3.8em; }
-            h1 { font-size: 2.1em; }
+            .frasco { width: 58px; height: 80px; font-size: 1.6em; }
+            .frasco-vacio { width: 140px; height: 175px; }
+            .regaloDentro { font-size: 3.5em; }
+            h1 { font-size: 1.9em; }
         }
     </style>
 </head>
 <body>
+
     <h1>✨ Frascos Mágicos ✨</h1>
-    <p>Toca los frasquitos de colores</p>
+    <p>Toca los 10 frasquitos</p>
 
     <div class="frascos-pequenos" id="frascos">
         <div class="frasco frasco1" data-color="1">🌸</div>
@@ -172,13 +143,12 @@
         <div class="liquido" id="liquido"></div>
         <div class="humo" id="humo"></div>
         <div class="regaloDentro" id="regaloDentro">🪄</div>
-        <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:3.5em; opacity:0.3;" id="emojiGrande">🪄</div>
     </div>
 
-    <div id="zonaRegalo" style="display:none; margin:20px auto;">
-        <h2 style="color:#ff00aa;">¡MÁGIA! ✨🌈</h2>
-        <div style="font-size:5.5em; margin:15px;" id="regaloGrande"></div>
-        <p id="regaloNombre" style="font-size:2em;"></p>
+    <div id="zonaRegalo" style="display:none;">
+        <h2 style="color:#ff00aa;">¡MÁGIA! ✨</h2>
+        <div style="font-size:5em; margin:10px 0;" id="regaloGrande"></div>
+        <p id="regaloNombre" style="font-size:1.8em; margin:8px;"></p>
         
         <button onclick="guardarRegalo()">💖 ¡Me encanta!</button>
         <button onclick="descartarRegalo()" style="background:#777;">😕 Otro</button>
@@ -190,11 +160,10 @@
     </div>
 
     <script>
-        // (El script es el mismo que antes, solo copio lo importante)
         let combinados = 0;
         let inventario = [];
         
-        const regalos = [ /* mismo array de regalos */ 
+        const regalos = [
             {emoji: "🏠", nombre: "Casita de ensueño"},
             {emoji: "🍳", nombre: "Cocinita mágica"},
             {emoji: "🧺", nombre: "Lavarropita rosa"},
@@ -204,9 +173,7 @@
             {emoji: "🪄", nombre: "Varita de hada"},
             {emoji: "🍰", nombre: "Torta arcoíris"},
             {emoji: "🚗", nombre: "Autito brillante"},
-            {emoji: "🌈", nombre: "Arcoíris de peluche"},
-            {emoji: "🧁", nombre: "Set de cupcakes"},
-            {emoji: "🪩", nombre: "Espejo mágico"}
+            {emoji: "🌈", nombre: "Arcoíris de peluche"}
         ];
 
         document.querySelectorAll('.frasco').forEach(frasco => {
@@ -215,38 +182,41 @@
                 frasco.classList.add('usado');
                 combinados++;
                 
-                const porcentaje = (combinados / 10) * 100;
-                document.getElementById("liquido").style.height = porcentaje + "%";
-                document.getElementById("liquido").style.background = `linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff)`;
+                document.getElementById("liquido").style.height = (combinados * 10) + "%";
+                document.getElementById("liquido").style.background = "linear-gradient(45deg, #ff00ff, #00ffff, #ffff00)";
 
                 if (combinados >= 10) activarMagia();
             });
         });
 
         function activarMagia() {
-            const humoContainer = document.getElementById("humo");
-            humoContainer.style.opacity = "1";
-            humoContainer.innerHTML = "";
-            for (let i = 0; i < 18; i++) {
+            const humo = document.getElementById("humo");
+            humo.style.opacity = "1";
+            humo.innerHTML = "";
+            for (let i = 0; i < 15; i++) {
                 const p = document.createElement("div");
-                const size = Math.random() * 45 + 25;
-                p.style.width = size + "px";
-                p.style.height = size + "px";
-                p.style.left = Math.random() * 100 + "%";
+                p.style.position = "absolute";
+                p.style.width = (20 + Math.random()*40) + "px";
+                p.style.height = p.style.width;
+                p.style.left = Math.random()*100 + "%";
                 p.style.bottom = "10%";
-                p.style.animationDelay = (Math.random() * 0.6) + "s";
-                humoContainer.appendChild(p);
+                p.style.background = "rgba(255,255,255,0.8)";
+                p.style.borderRadius = "50%";
+                p.style.filter = "blur(6px)";
+                p.style.animation = "humoAnim 1.5s forwards";
+                p.style.animationDelay = Math.random() + "s";
+                humo.appendChild(p);
             }
 
             setTimeout(() => {
-                const regalo = regalos[Math.floor(Math.random() * regalos.length)];
-                document.getElementById("regaloDentro").textContent = regalo.emoji;
+                const r = regalos[Math.floor(Math.random()*regalos.length)];
+                document.getElementById("regaloDentro").textContent = r.emoji;
                 document.getElementById("regaloDentro").style.opacity = "1";
                 
-                document.getElementById("regaloGrande").textContent = regalo.emoji;
-                document.getElementById("regaloNombre").textContent = regalo.nombre;
+                document.getElementById("regaloGrande").textContent = r.emoji;
+                document.getElementById("regaloNombre").textContent = r.nombre;
                 document.getElementById("zonaRegalo").style.display = "block";
-            }, 800);
+            }, 700);
         }
 
         function guardarRegalo() {
@@ -254,12 +224,11 @@
             actualizarInventario();
             reiniciar();
         }
-
         function descartarRegalo() { reiniciar(); }
 
         function actualizarInventario() {
-            const cont = document.getElementById("inventarioItems");
-            cont.innerHTML = inventario.map(item => `<div class="item-inventario">${item}</div>`).join('');
+            document.getElementById("inventarioItems").innerHTML = 
+                inventario.map(e => `<span class="item-inventario">${e}</span>`).join('');
         }
 
         function reiniciar() {
@@ -271,5 +240,11 @@
             document.querySelectorAll('.frasco').forEach(f => f.classList.remove('usado'));
         }
     </script>
+
+    <style>
+        @keyframes humoAnim {
+            to { transform: translateY(-150px) scale(1.5); opacity: 0; }
+        }
+    </style>
 </body>
 </html>
